@@ -52,18 +52,65 @@ def generate_response(user_input):
             stream=False  # Set to True if you want streaming responses
         )
 
+<<<<<<< Updated upstream
         return completion.choices[0].message.content  # Extract response text
 
     except Exception as e:
         return f"Error: {e}"  
+=======
+# Function to display visual indicators based on probability
+def get_visual_indicator(probability, detected):
+    if detected and probability > 0.7:
+        return "🚫"  # Red square for high probability detections
+    elif probability > 0.05:
+        return "👍"  # Thumbs up for medium probability
+    else:
+        return "👍"  # Thumbs up for low probability
+>>>>>>> Stashed changes
 
 # Streamlit UI
 st.title("Threat Detection Software")
 
 # Chat Input
 user_input = st.text_area("Type your message...")
+<<<<<<< Updated upstream
 
 if user_input:
     response = generate_response(user_input)
     st.markdown(f"**You:** {user_input}")
     st.markdown(f"**GPT:** {response}")
+=======
+send_button = st.button("Send")
+
+if user_input and send_button:
+    response = generate_response(user_input)
+    
+    try:
+        # Parse the JSON response
+        threat_data = json.loads(response)
+        
+        # Create a DataFrame from the threats list
+        if "threats" in threat_data:
+            df = pd.DataFrame(threat_data["threats"])
+            
+            # Add visual indicators
+            df["Visual"] = df.apply(lambda row: get_visual_indicator(row["probability"], row["detected"]), axis=1)
+            
+            # Display the user input
+            st.markdown(f"**You:** {user_input}")
+            
+            # Display results header
+            st.header("Results:")
+            
+            # Display the threats table
+            st.dataframe(df)
+            
+            # Display threat level and summary
+            st.subheader(f"Threat Level: {threat_data.get('threat_level', 'Unknown').capitalize()}")
+            st.text(threat_data.get('summary', 'No summary provided'))
+        else:
+            st.error("Invalid response format from the API")
+    except json.JSONDecodeError:
+        st.error("Failed to parse API response as JSON")
+        st.text(response)
+>>>>>>> Stashed changes
