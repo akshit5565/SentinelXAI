@@ -10,9 +10,9 @@ import pandas as pd
 load_dotenv()
 
 # Azure OpenAI Configuration
-endpoint = os.getenv("ENDPOINT_URL", "https://jaggery-open-ai.openai.azure.com/")
-deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
-api_key = os.getenv("AZURE_OPENAI_API_KEYS")
+endpoint = st.secrets["ENDPOINT_URL"]
+deployment = st.secrets["DEPLOYMENT_NAME"]
+api_key = st.secrets["AZURE_OPENAI_API_KEY"]
 
 # Initialize Azure OpenAI client
 client = AzureOpenAI(
