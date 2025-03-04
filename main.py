@@ -52,12 +52,6 @@ def generate_response(user_input):
             stream=False  # Set to True if you want streaming responses
         )
 
-<<<<<<< Updated upstream
-        return completion.choices[0].message.content  # Extract response text
-
-    except Exception as e:
-        return f"Error: {e}"  
-=======
 # Function to display visual indicators based on probability
 def get_visual_indicator(probability, detected):
     if detected and probability > 0.7:
@@ -66,20 +60,12 @@ def get_visual_indicator(probability, detected):
         return "👍"  # Thumbs up for medium probability
     else:
         return "👍"  # Thumbs up for low probability
->>>>>>> Stashed changes
 
 # Streamlit UI
 st.title("Threat Detection Software")
 
 # Chat Input
 user_input = st.text_area("Type your message...")
-<<<<<<< Updated upstream
-
-if user_input:
-    response = generate_response(user_input)
-    st.markdown(f"**You:** {user_input}")
-    st.markdown(f"**GPT:** {response}")
-=======
 send_button = st.button("Send")
 
 if user_input and send_button:
@@ -113,4 +99,3 @@ if user_input and send_button:
     except json.JSONDecodeError:
         st.error("Failed to parse API response as JSON")
         st.text(response)
->>>>>>> Stashed changes
