@@ -12,7 +12,7 @@ load_dotenv()
 # Azure OpenAI Configuration
 endpoint = st.secrets["ENDPOINT_URL"]
 deployment = st.secrets["DEPLOYMENT_NAME"]
-api_key = st.secrets["AZURE_OPENAI_API_KEY"]
+api_key = st.secrets["AZURE_OPENAI_API_KEYS"]
 
 # Initialize Azure OpenAI client
 client = AzureOpenAI(
